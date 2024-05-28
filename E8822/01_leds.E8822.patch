@@ -1,0 +1,12 @@
+--- ./01_leds	2024-05-29 04:58:29.327840000 +0800
++++ ./01_leds.E8822	2024-05-29 05:43:10.451771700 +0800
+@@ -7,6 +7,9 @@
+ board_config_update
+ 
+ case $board in
++ZTE,E8822)
++	ucidef_set_led_switch "internet" "INTERNET" "$boardname:green:wan" "switch0" "0x01"
++	;;
+ asus,rt-n56u-b1)
+ 	ucidef_set_led_netdev "lan" "LAN link" "blue:lan" "br-lan"
+ 	ucidef_set_led_netdev "wan" "WAN link" "blue:wan" "wan"

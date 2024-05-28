@@ -1,0 +1,23 @@
+--- ./02_network	2024-05-29 04:58:29.328816000 +0800
++++ ./02_network.E8822	2024-05-29 05:47:06.296073500 +0800
+@@ -8,6 +8,10 @@
+ 	local board="$1"
+ 
+ 	case $board in
++	ZTE,E8822)
++		ucidef_add_switch "switch0" \
++			"0:lan:1" "1:lan:2" "2:lan:3" "3:lan:4" "4:wan:5" "6@eth0"
++		;;	
+ 	ampedwireless,ally-00x19k|\
+ 	edimax,re23s|\
+ 	mikrotik,routerboard-m11g|\
+@@ -139,6 +143,9 @@
+ 	local label_mac=""
+ 
+ 	case $board in
++	ZTE,E8822)
++		wan_mac=$(mtd_get_mac_binary factory 0xe006)
++		;;	
+ 	ampedwireless,ally-00x19k)
+ 		lan_mac=$(mtd_get_mac_ascii hwconfig HW.LAN.MAC.Address)
+ 		label_mac=$lan_mac
