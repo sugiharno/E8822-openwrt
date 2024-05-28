@@ -10,6 +10,12 @@
 # See /LICENSE for more information.
 #
 
+sudo -E apt-get -qq install patch
+# patch target/linux/ramips/mt7621/base-files/etc/board.d/01_leds < E8822/01_leds.E8822.patch
+# patch target/linux/ramips/mt7621/base-files/etc/board.d/02_network < E8822/02_network.E8822.patch
+# patch target/linux/ramips/image/mt7621.mk < E8822/mt7621.mk.E8822.patch
+# cp E8822/mt7621_ZTE_E8822.dts target/linux/ramips/dts
+
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
