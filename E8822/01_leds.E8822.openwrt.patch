@@ -1,0 +1,13 @@
+--- 01_leds	2024-05-29 10:14:19.219523000 +0800
++++ 01_leds.E8822.openwrt	2024-05-29 11:43:00.923793300 +0800
+@@ -7,6 +7,10 @@
+ board_config_update
+ 
+ case $board in
++ZTE,E8822)
++	ucidef_set_led_netdev"sys" "SYS_LED" "$boardname:white:sys""eth0" "tx rx"
++	ucidef_set_led_default"power" "POWER_LED" "$boardname:white:power""1"
++	;;
+ alfa-network,ax1800rm)
+ 	ucidef_set_led_netdev "lan1" "lan1" "green:lan1" "lan1"
+ 	ucidef_set_led_netdev "lan2" "lan2" "green:lan2" "lan2"
