@@ -2,10 +2,10 @@
 *********************************************************
 编译适配 中兴 E8822 路由器的openwrt.
 
+*** 在调试,还不能成功编译 ***
+
 设备dts文件来自 https://github.com/jacelift/lede17.01_jacelift.
-
 编译控制文件来自 https://github.com/P3TERX/Actions-OpenWrt.
-
 openwrt 来自 https://github.com/coolsnowwolf/lede.
 *********************************************************
 
