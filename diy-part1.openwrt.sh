@@ -10,11 +10,11 @@
 # See /LICENSE for more information.
 #
 
-sudo -E apt-get -qq install patch
-patch target/linux/ramips/mt7621/base-files/etc/board.d/01_leds < ~/work/E8822-openwrt/E8822-openwrt/E8822/01_leds.E8822.openwrt.patch
-patch target/linux/ramips/mt7621/base-files/etc/board.d/02_network < ~/work/E8822-openwrt/E8822-openwrt/E8822/02_network.E8822.openwrt.patch
-patch target/linux/ramips/image/mt7621.mk < ~/work/E8822-openwrt/E8822-openwrt/E8822/mt7621.mk.E8822.openwrt.patch
-cp -f ~/work/E8822-openwrt/E8822-openwrt/E8822/mt7621_ZTE_E8822.dts target/linux/ramips/dts
+# sudo -E apt-get -qq install patch
+# patch target/linux/ramips/mt7621/base-files/etc/board.d/01_leds < $GITHUB_WORKSPACE/E8822/01_leds.E8822.openwrt.patch
+# patch target/linux/ramips/mt7621/base-files/etc/board.d/02_network < $GITHUB_WORKSPACE/E8822/02_network.E8822.openwrt.patch
+# patch target/linux/ramips/image/mt7621.mk < $GITHUB_WORKSPACE/E8822/mt7621.mk.E8822.openwrt.patch
+# cp -f $GITHUB_WORKSPACE/E8822/mt7621_ZTE_E8822.dts target/linux/ramips/dts
 
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
