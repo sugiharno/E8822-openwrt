@@ -18,10 +18,10 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: v19.07.10
-#  FEEDS_CONF: feeds.conf.default
-#  CONFIG_FILE: E8822/v19.07.10.default0.config
-#  DIY_P1_SH: diy-part1.openwrt.sh
-#  DIY_P2_SH: diy-part2.sh
+  FEEDS_CONF: feeds.conf.default
+  CONFIG_FILE: E8820V2/v19.07.10/E8820V2.config
+  DIY_P1_SH: 
+  DIY_P2_SH: 
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
