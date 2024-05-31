@@ -4,10 +4,13 @@
 在拆开E8822后,发现里面PCB标识是E8820V2.
 
 在 github action 编译的时候，根据action的进度提示用ssh连接服务器修改文件.
-在目录 E8820V2/v19.07.10目录中的文件是编译 openwrt v19.07.10 时用. (测试可以使用)
+在目录 E8820V2/v19.07.10目录中的文件是编译 openwrt v19.07.10 时用. (测试在本地编译并刷到路由器可以使用, 但在github action编译出现不明错误.)
 在目录 E8820V2/v19.02-目录中的文件是编译 openwrt v19.07.10 之后版本时用.
 
-设备dts文件来自 https://github.com/jacelift/lede17.01_jacelift.
+详细使用方法参看  https://www.right.com.cn/forum/thread-506561-1-1.html
+
+设备dts文件来自 https://www.right.com.cn/forum/thread-506561-1-1.html
+https://github.com/jacelift/lede17.01_jacelift.
 
 编译控制文件来自 https://github.com/P3TERX/Actions-OpenWrt.
 openwrt 来自 https://github.com/openwrt/openwrt.
