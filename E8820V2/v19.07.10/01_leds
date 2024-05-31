@@ -13,9 +13,10 @@ boardname="${board##*,}"
 board_config_update
 
 case $board in
-ZTE,E8822)
-	ucidef_set_led_switch "internet" "INTERNET" "$boardname:green:wan" "switch0" "0x01"
-	;;
+zte,e8820v2)
+  ucidef_set_led_netdev "sys" "SYS_LED" "$boardname:white:sys" "eth0" "tx rx"
+  ucidef_set_led_default "power" "POWER_LED" "$boardname:white:power" "1"
+;;
 3g-6200n|\
 br-6475nd|\
 mzk-w300nh2)

@@ -1,12 +1,18 @@
 **English** | [中文](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 *********************************************************
 编译适配 中兴 E8822 路由器的openwrt.
+在拆开E8822后,发现里面PCB标识是E8820V2.
 
-*** 在调试,还不能成功编译 ***
+在 github action 编译的时候，根据action的进度提示用ssh连接服务器修改文件.
+在目录 E8820V2/v19.07.10目录中的文件是编译 openwrt v19.07.10 时用. (测试可以使用)
+在目录 E8820V2/v19.02-目录中的文件是编译 openwrt v19.07.10 之后版本时用.
 
 设备dts文件来自 https://github.com/jacelift/lede17.01_jacelift.
+
 编译控制文件来自 https://github.com/P3TERX/Actions-OpenWrt.
-openwrt 来自 https://github.com/coolsnowwolf/lede.
+openwrt 来自 https://github.com/openwrt/openwrt.
+	https://github.com/coolsnowwolf/lede.   
+
 *********************************************************
 
 # Actions-OpenWrt
