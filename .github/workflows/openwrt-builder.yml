@@ -61,10 +61,11 @@ jobs:
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        [ -e $DIY_P1_SH ] && chmod +x $DIY_P1_SH
+#        [ -e $DIY_P1_SH ] && chmod +x $DIY_P1_SH
         cd openwrt
         mkdir -p patchs
-        [ -e $DIY_P1_SH ] &&  $GITHUB_WORKSPACE/$DIY_P1_SH
+#        [ -e $DIY_P1_SH ] &&  $GITHUB_WORKSPACE/$DIY_P1_SH
+        echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
@@ -76,9 +77,9 @@ jobs:
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        [ -e $DIY_P2_SH ] &&   chmod +x $DIY_P2_SH
+#        [ -e $DIY_P2_SH ] &&   chmod +x $DIY_P2_SH
         cd openwrt
-        [ -e $DIY_P2_SH ] &&    $GITHUB_WORKSPACE/$DIY_P2_SH
+#        [ -e $DIY_P2_SH ] &&    $GITHUB_WORKSPACE/$DIY_P2_SH
 
     - name: Start SSH via tmate
       uses: P3TERX/ssh2actions@main
