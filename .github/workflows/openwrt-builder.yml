@@ -20,8 +20,8 @@ env:
   REPO_BRANCH: v19.07.10
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: E8820V2/v19.07.10/E8820V2.config
-  DIY_P1_SH: 
-  DIY_P2_SH: 
+  DIY_P1_SH: diy_p1_sh
+  DIY_P2_SH: diy_p2_sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
