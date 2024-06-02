@@ -31,13 +31,13 @@
 
 		git apply ../E8822-openwrt/v19.07.10/e8820v2.patch
 
-		cp  ../E8822-openwrt/v19.07.10/E8820V2.config  .config
+		cp ../E8822-openwrt/v19.07.10/e8820v2.config .config
 
 4. 配置并编译
 
-		./script/feeds update -a
+		./scripts/feeds update -a
 
-		./script/feeds install  -a
+		./scripts/feeds install  -a
 
 		make menuconfig
 
