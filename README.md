@@ -4,19 +4,52 @@
 在拆开E8822后,发现里面PCB标识是E8820V2.
 
 在 github action 编译的时候，根据action的进度提示用ssh连接服务器修改文件.
-在目录 E8820V2/v19.07.10目录中的文件是编译 openwrt v19.07.10 时用. (测试在本地编译并刷到路由器可以使用, 但在github action编译出现不明错误.)
-在目录 E8820V2/v19.02-目录中的文件是编译 openwrt v19.07.10 之后版本时用.
+在目录 v19.07.10的文件是编译 openwrt 版本v19.07.10 时用. (测试在本地编译并刷到路由器可以使用, 但在github action编译出现不明错误.)
+在目录 openwrt-21.02中的文件是编译 分支openwrt-21.03 版本时用.(已经本地测试 r16881+1-4a1d8ef55c 通过了. )
 
 详细使用方法参看  https://www.right.com.cn/forum/thread-506561-1-1.html
 
-设备dts文件来自 https://www.right.com.cn/forum/thread-506561-1-1.html
-https://github.com/jacelift/lede17.01_jacelift.
+配置文件整理自:https://www.right.com.cn/forum/thread-506561-1-1.html
+
+https://github.com/jacelift/lede17.01_jacelift
 
 编译控制文件来自 https://github.com/P3TERX/Actions-OpenWrt.
 openwrt 来自 https://github.com/openwrt/openwrt.
-	https://github.com/coolsnowwolf/lede.   
+
+--------------------------------------------------------
+openwrt版本v19.07.10使用步骤: (没有测试)
+
+1. 下载openwrt: git clone https://github.com/openwrt/openwrt.git
+
+2. 下载补丁文件: https://github.com/hiliuyj/E8822-openwrt.git
+
+3. 打补丁： cd openwrt
+
+		git apply ../E8822-openwrt/v19.07.10/e8820v2.patch
+
+		cp  ../E8822-openwrt/v19.07.10/E8820V2.config  .config
+
+4. 配置并编译
+
+		./script/feeds update -a
+
+		./script/feeds install  -a
+
+		make menuconfig
+
+		make defconfig
+
+		make
+		
+--------------------------------------------------------
+测试了 分支 openwrt-23.05,  没有无线,或者有2.4G或5G. 
+测试了 分支 openwrt-22.03,  多次在web配置界面按扫描,启动无线按钮, 才出来无线.
 
 *********************************************************
+测试主要内容是: vlan设置与无线使用.
+注意,openwrt版本v19.07.10 的vlan设置是 swconfig，而高版本是 DSA.
+
+---------------------------------------------------------
 
 # Actions-OpenWrt
 
