@@ -28,7 +28,6 @@ env:
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
   SSH_ACTIONS: false
-  FIRMWARE: openwrt/bin/targets/ramips/mt7621
   
 jobs:
   build:
@@ -62,8 +61,10 @@ jobs:
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        [ -e $REPO_BRANCH/$CONFIG_FILE ] && mv $REPO_BRANCH/$CONFIG_FILE openwrt/.config
         chmod +x $REPO_BRANCH/$DIY_P1_SH
         cd openwrt
+        git apply $GITHUB_WORKSPACE/$REPO_BRANCH/$PATCH_FILE
         $GITHUB_WORKSPACE/$REPO_BRANCH/$DIY_P1_SH
 
     - name: Update feeds
@@ -75,10 +76,8 @@ jobs:
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
-        [ -e $REPO_BRANCH/$CONFIG_FILE ] && mv $REPO_BRANCH/$CONFIG_FILE openwrt/.config
         chmod +x $REPO_BRANCH/$DIY_P2_SH
-        cd openwrt
-        git apply $GITHUB_WORKSPACE/$REPO_BRANCH/$PATCH_FILE
+        cd openwrt        
         $GITHUB_WORKSPACE/$REPO_BRANCH/$DIY_P2_SH
 
     - name: Start SSH via tmate
@@ -124,6 +123,7 @@ jobs:
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf packages
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware directory
@@ -131,7 +131,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: $FIRMWARE
+        path: ${{ env.FIRMWARE }}
 
     - name: Generate release tag
       id: tag
@@ -150,7 +150,7 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        files: $FIRMWARE/*
+        files: ${{ env.FIRMWARE }}/*
 
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
