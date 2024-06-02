@@ -1,29 +1,33 @@
 **English** | [中文](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 *********************************************************
-编译适配 中兴 E8822 路由器的openwrt.
+--------------------------------------------------------
+## 编译用于 中兴 E8822 路由器的openwrt.
+
 在拆开E8822后,发现里面PCB标识是E8820V2.
 
-在 github action 编译的时候，根据action的进度提示用ssh连接服务器修改文件.
-在目录 v19.07.10的文件是编译 openwrt 版本v19.07.10 时用. (测试在本地编译并刷到路由器可以使用, 但在github action编译出现不明错误.)
-在目录 openwrt-21.02中的文件是编译 分支openwrt-21.03 版本时用.(已经本地测试 r16881+1-4a1d8ef55c 通过了. )
+--------------------------------------------------------
+## 使用方法：
 
-详细使用方法参看  https://www.right.com.cn/forum/thread-506561-1-1.html
+在 Actions 中运行 OpenWrt-v19.07.10 Builder, 编译v19.07.10版本的, 用于 中兴 E8822 路由器的openwrt.
 
-配置文件整理自:https://www.right.com.cn/forum/thread-506561-1-1.html
+在 Actions 中运行 OpenWrt-21.02 Builder, 编译分支v21.02版本的, 用于 中兴 E8822 路由器的openwrt.
 
-https://github.com/jacelift/lede17.01_jacelift
-
-编译控制文件来自 https://github.com/P3TERX/Actions-OpenWrt.
-openwrt 来自 https://github.com/openwrt/openwrt.
+单独编译时间约1小时.
 
 --------------------------------------------------------
-openwrt版本v19.07.10使用步骤: (没有测试)
+本仓库也可以下载到本地使用.以编译 openwrt版本v19.07.10 为例( 需要约10G~20 空间, 根据计算机速度1~5个小时,或更长时间):
 
-1. 下载openwrt: git clone https://github.com/openwrt/openwrt.git
+1. 下载openwrt: 
 
-2. 下载补丁文件: https://github.com/hiliuyj/E8822-openwrt.git
+		git clone https://github.com/openwrt/openwrt -b v19.07.10
 
-3. 打补丁： cd openwrt
+2. 下载补丁文件: 
+
+		git clone https://github.com/hiliuyj/E8822-openwrt
+
+3. 打补丁： 
+
+		cd openwrt
 
 		git apply ../E8822-openwrt/v19.07.10/e8820v2.patch
 
@@ -40,17 +44,43 @@ openwrt版本v19.07.10使用步骤: (没有测试)
 		make defconfig
 
 		make
-		
---------------------------------------------------------
-测试了 分支 openwrt-23.05,  没有无线,或者有2.4G或5G. 
-测试了 分支 openwrt-22.03,  多次在web配置界面按扫描,启动无线按钮, 才出来无线.
 
-*********************************************************
-测试主要内容是: vlan设置与无线使用.
-注意,openwrt版本v19.07.10 的vlan设置是 swconfig，而高版本是 DSA.
+--------------------------------------------------------
+在目录 v19.07.10的文件,用于编译 openwrt 版本v19.07.10. 
+
+在目录 openwrt-21.02中的文件,用于编译 分支openwrt-21.03.
+
+方便改动以编译所要的openwrt.
 
 ---------------------------------------------------------
+## 编译的openwrt测试.
 
+测试主要内容是: vlan设置与无线, 尚没发现异常. 
+
+注意,openwrt版本v19.07.10 的vlan设置是 swconfig，而高版本是 DSA.操作上区别很大.
+
+谨慎将补丁用于其它openwrt版本.
+
+测试了 分支 openwrt-23.05,  没有无线,或者只有2.4G或5G.
+
+测试了 分支 openwrt-22.03,  多次在web配置界面按扫描,启动无线按钮, 才出来无线.
+
+---------------------------------------------------------
+## 资料来源
+
+配置文件整理自:https://www.right.com.cn/forum/thread-506561-1-1.html
+
+https://github.com/jacelift/lede17.01_jacelift
+
+编译控制文件整理自 https://github.com/P3TERX/Actions-OpenWrt.
+
+openwrt 来自 https://github.com/openwrt/openwrt.
+
+---------------------------------------------------------
+中兴 E8822 路由器: CPU MT7621A, 2.4G MT7603EN, 5G MT7612EN, Flash, 16MB, RAM 64MB
+5个千兆口, 1个USB, 4天线, 功耗 2.5W ～ 5W , 里面散热片小,外壳封闭. 轻度使用建议打开外壳.重度使用建议加风扇.
+
+---------------------------------------------------------
 # Actions-OpenWrt
 
 [![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/P3TERX/Actions-OpenWrt/blob/master/LICENSE)
