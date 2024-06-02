@@ -181,7 +181,7 @@ index 28ae0d451f..7be2e74ad4 100644
 +define Device/zte_e8820v2
 +  MTK_SOC := mt7621
 +  DTS := mt7621_zte_e8820v2
-+  DEVICE_TITLE := ZTE_E8820v2  
++  DEVICE_TITLE := ZTE_E8820v2
 +  IMAGE_SIZE := 16064k
 +  DEVICE_VENDOR := ZTE
 +  DEVICE_MODEL := E8820V2
