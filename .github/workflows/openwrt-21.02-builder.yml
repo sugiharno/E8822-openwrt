@@ -28,6 +28,7 @@ env:
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
   SSH_ACTIONS: false
+  FIRMWARE: openwrt/bin/targets/ramips/mt7621
   
 jobs:
   build:
@@ -121,10 +122,8 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd openwrt/bin
-        cd targets/*/*
+        cd openwrt/bin/targets/*/*
         rm -rf packages
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware directory
@@ -132,7 +131,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: ${{ env.FIRMWARE }}
+        path: $FIRMWARE
 
     - name: Generate release tag
       id: tag
@@ -151,7 +150,7 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
+        files: $FIRMWARE/*
 
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
