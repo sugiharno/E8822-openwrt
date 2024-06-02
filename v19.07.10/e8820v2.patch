@@ -67,7 +67,7 @@ index 0000000000..1ac3d9a306
 +
 +		led_power: power {
 +			label = "e8820v2:white:power";
-+			gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;            
++			gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
 +		};
 +	};
 +
@@ -149,7 +149,6 @@ index 0000000000..1ac3d9a306
 +	mt76@0,0 {
 +		reg = <0x0000 0 0 0 0>;
 +		mediatek,mtd-eeprom = <&factory 0x8000>;
-+		ieee80211-freq-limit = <5000000 6000000>;
 +
 +		led {
 +			led-sources = <2>;
@@ -186,7 +185,7 @@ index 28ae0d451f..2ff26e1828 100644
 +  DEVICE_VENDOR := ZTE
 +  DEVICE_MODEL := E8820V2
 +  DEVICE_VARIANT := 16M
-+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 kmod-usb-ledtrig-usbport wpad hostapd-utils luci
++  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 kmod-usb-ledtrig-usbport -uboot-envtools
 +endef
 +TARGET_DEVICES += zte_e8820v2
 +
