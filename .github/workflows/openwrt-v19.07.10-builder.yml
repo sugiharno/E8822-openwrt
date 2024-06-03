@@ -61,7 +61,6 @@ jobs:
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        [ -e $REPO_BRANCH/$CONFIG_FILE ] && cp $REPO_BRANCH/$CONFIG_FILE openwrt/.config
         chmod +x $REPO_BRANCH/$DIY_P1_SH
         cd openwrt
         git apply $GITHUB_WORKSPACE/$REPO_BRANCH/$PATCH_FILE
@@ -76,8 +75,11 @@ jobs:
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
+        [ -e $REPO_BRANCH/$CONFIG_FILE ] && cp $REPO_BRANCH/$CONFIG_FILE openwrt/.config
         chmod +x $REPO_BRANCH/$DIY_P2_SH
-        cd openwrt        
+        cd openwrt
+        make defconfig
+        [ -e $GITHUB_WORKSPACE/$REPO_BRANCH/$CONFIG_FILE ] && cp $GITHUB_WORKSPACE/$REPO_BRANCH/$CONFIG_FILE .config
         $GITHUB_WORKSPACE/$REPO_BRANCH/$DIY_P2_SH
 
     - name: Start SSH via tmate
