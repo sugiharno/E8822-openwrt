@@ -1,9 +1,9 @@
 diff --git a/target/linux/ramips/dts/mt7621_zte_e8820v2.dts b/target/linux/ramips/dts/mt7621_zte_e8820v2.dts
 new file mode 100644
-index 000000000..fcfd7e9b2
+index 000000000..4222800d9
 --- /dev/null
 +++ b/target/linux/ramips/dts/mt7621_zte_e8820v2.dts
-@@ -0,0 +1,148 @@
+@@ -0,0 +1,150 @@
 +#include "mt7621.dtsi"
 +
 +#include <dt-bindings/gpio/gpio.h>
@@ -97,7 +97,8 @@ index 000000000..fcfd7e9b2
 +};
 +
 +&pcie0 {
-+	mt76@0,0 {
++	wifi@0,0 {
++		compatible = "mediatek,mt76";
 +		reg = <0x0000 0 0 0 0>;
 +		mediatek,mtd-eeprom = <&factory 0x0000>;
 +		led {
@@ -107,7 +108,8 @@ index 000000000..fcfd7e9b2
 +};
 +
 +&pcie1 {
-+	mt76@0,0 {
++	wifi@0,0 {
++		compatible = "mediatek,mt76";
 +		reg = <0x0000 0 0 0 0>;
 +		mediatek,mtd-eeprom = <&factory 0x8000>;
 +		led {
