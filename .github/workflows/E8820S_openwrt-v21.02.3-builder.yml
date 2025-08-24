@@ -60,6 +60,7 @@ jobs:
         tar -zxvf code.tar.gz
         git config --global user.email "hiliuyj@gmail.com"
         git config --global user.name "hiliuyj"
+        git config --global apply.whitespace nowarn
         sh code/append.sh
         rm -rf code.tar.gz code
 
