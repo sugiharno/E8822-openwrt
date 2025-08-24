@@ -61,7 +61,9 @@ jobs:
         git config --global user.email "hiliuyj@gmail.com"
         git config --global user.name "hiliuyj"
         git config --global apply.whitespace nowarn
-        sh code/append.sh
+        git apply  code/patch
+        cp -r code/tree/* . 
+        cp -r code/tree/.[^.]* .
         rm -rf code.tar.gz code
 
     - name: Update feeds
