@@ -56,10 +56,10 @@ jobs:
     - name: Load custom feeds
       run: |
         cd openwrt
-		wget https://raw.githubusercontent.com/TsXor/my-openwrt-archive/master/zte_e8820s/orig-v21.02.3/code.tar.gz
-		tar -zxvf code.tar.gz
-		sh code/append.sh
-		rm -rf code.tar.gz code
+        wget https://raw.githubusercontent.com/TsXor/my-openwrt-archive/master/zte_e8820s/orig-v21.02.3/code.tar.gz
+        tar -zxvf code.tar.gz
+        sh code/append.sh
+       rm -rf code.tar.gz code
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
