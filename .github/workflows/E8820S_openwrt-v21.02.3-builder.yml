@@ -26,6 +26,7 @@ on:
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
+  REPO_BRANCH: ${{ inputs.REPO_BRANCH }}
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
@@ -55,8 +56,6 @@ jobs:
         sudo chown $USER:$GROUPS /workdir
 
     - name: Clone source code
-      env:
-        REPO_BRANCH: ${{ inputs.REPO_BRANCH }}
       working-directory: /workdir
       run: |
         df -hT $PWD
@@ -129,8 +128,6 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware directory
-      env:
-        REPO_BRANCH: ${{ inputs.REPO_BRANCH }}    
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
