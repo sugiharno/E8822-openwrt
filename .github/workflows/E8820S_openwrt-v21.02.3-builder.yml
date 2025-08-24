@@ -16,17 +16,26 @@ on:
   workflow_dispatch:
     inputs:
       REPO_BRANCH:
-        description: "Select_kernel_version"
+        description: "Select_openwrt_version"
         required: false
         default: "v21.02.3"
         type: choice
         options:
-          - v21.02.2        
+          - v21.02.2
           - v21.02.3
           - v21.02.7
+      REPO_URL:
+        description: "Select_openwrt_source"
+        required: false
+        default: "https://github.com/siwind/openwrt"
+        type: choice
+        options:
+          - https://github.com/siwind/openwrt
+          - https://github.com/openwrt/openwrt
+      
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_URL: ${{ inputs.REPO_URL }}
   REPO_BRANCH: ${{ inputs.REPO_BRANCH }}
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
