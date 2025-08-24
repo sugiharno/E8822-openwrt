@@ -27,10 +27,9 @@ on:
       REPO_URL:
         description: "Select_openwrt_source"
         required: false
-        default: "https://github.com/siwind/openwrt"
+        default: "https://github.com/openwrt/openwrt"
         type: choice
         options:
-          - https://github.com/siwind/openwrt
           - https://github.com/openwrt/openwrt
       
 
