@@ -64,6 +64,7 @@ jobs:
         git apply  code/patch
         cp -r code/tree/* . 
         cp -r code/tree/.[^.]* .
+        make defconfig
         rm -rf code.tar.gz code
 
     - name: Update feeds
