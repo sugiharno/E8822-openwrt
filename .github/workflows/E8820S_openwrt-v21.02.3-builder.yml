@@ -14,9 +14,9 @@ name: E8820S OpenWrt-v21.02.3 Builder
 
 on:
   workflow_dispatch:
-    inputs:  
-      REPO_BRANCH: v21.02.3
-        description: "Select kernel version"
+    inputs:
+      REPO_BRANCH:
+        description: "Select_kernel_version"
         required: false
         default: "v21.02.3"
         type: choice
