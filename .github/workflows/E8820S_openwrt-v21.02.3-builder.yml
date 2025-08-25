@@ -82,6 +82,8 @@ jobs:
         git apply  code/patch
         cp -r code/tree/* . 
         cp -r code/tree/.[^.]* .
+        wget https://github.com/siwind/openwrt/raw/refs/heads/main/target/linux/ramips/dts/mt7621_zte_e8820s.dts
+        mv -f ./mt7621_zte_e8820s.dts ./target/linux/ramips/dts/
         rm -rf code.tar.gz code
 
     - name: Update feeds
