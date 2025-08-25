@@ -31,11 +31,19 @@ on:
         type: choice
         options:
           - https://github.com/openwrt/openwrt
-      
+      CONFIG_URL:
+        description: "Select_CONFIG_URL"
+        required: false
+        default: "config-zte-e8820s"
+        type: choice
+        options:
+          - config-zte-e8820s
+          - config-zte-e8820s-full
 
 env:
   REPO_URL: ${{ inputs.REPO_URL }}
   REPO_BRANCH: ${{ inputs.REPO_BRANCH }}
+  CONFIG_URL: https://github.com/siwind/openwrt/raw/refs/heads/main/user-config/${{ inputs.CONFIG_URL }}
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
@@ -84,6 +92,8 @@ jobs:
         cp -r code/tree/.[^.]* .
         wget https://github.com/siwind/openwrt/raw/refs/heads/main/target/linux/ramips/dts/mt7621_zte_e8820s.dts
         mv -f ./mt7621_zte_e8820s.dts ./target/linux/ramips/dts/
+        wget $CONFIG_URL
+        mv -f ./${{ inputs.CONFIG_URL }} ./.config
         rm -rf code.tar.gz code
 
     - name: Update feeds
