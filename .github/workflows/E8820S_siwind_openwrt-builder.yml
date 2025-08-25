@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       REPO_BRANCH:
-        description: "Select_kernel_version"
+        description: "Select_openwrt_version"
         required: false
         default: "openwrt-21.02"
         type: choice
@@ -57,8 +57,6 @@ jobs:
         sudo chown $USER:$GROUPS /workdir
 
     - name: Clone source code
-      env:
-        REPO_BRANCH: ${{ inputs.REPO_BRANCH }}
       working-directory: /workdir
       run: |
         df -hT $PWD
@@ -124,8 +122,6 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware directory
-      env:
-        REPO_BRANCH: ${{ inputs.REPO_BRANCH }}    
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
