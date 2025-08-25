@@ -18,9 +18,10 @@ on:
       REPO_BRANCH:
         description: "Select_openwrt_version"
         required: false
-        default: "openwrt-21.02"
+        default: "main"
         type: choice
         options:
+          - main
           - openwrt-19.07
           - openwrt-21.02
           - openwrt-23.05
