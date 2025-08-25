@@ -66,7 +66,7 @@ jobs:
     - name: Load custom feeds
       run: |
         cd openwrt
-        cp user-config/config-zte-e8820s ./.config
+        cp ./user-config/config-zte-e8820s ./.config
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
