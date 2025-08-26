@@ -106,7 +106,7 @@ jobs:
         cd openwrt
         wget $CONFIG_URL/$CONFIG_DEV
         mv -f ./$CONFIG_DEV ./.config
-        
+
     - name: Load patch
       if: !contains($PATHCH_FILE, 'NONE')
       run: |
