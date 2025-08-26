@@ -106,15 +106,10 @@ jobs:
         cd openwrt
         wget $CONFIG_URL/$CONFIG_DEV
         mv -f ./$CONFIG_DEV ./.config
-
-    - name: Load patch
-      if: !contains($PATHCH_FILE, 'nonething')
-      run: |
-        cd openwrt        
         wget $CONFIG_URL/$PATHCH_FILE
         patch -p2 < $PATHCH_FILE
         rm -f $PATHCH_FILE
-        
+
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
