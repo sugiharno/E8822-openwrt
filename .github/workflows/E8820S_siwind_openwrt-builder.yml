@@ -67,7 +67,7 @@ jobs:
     - name: Load custom feeds
       run: |
         cd openwrt
-        cp ./user-config/config-zte-e8820s-full ./.config
+        cp ./user-config/config-zte-e8820s ./.config
         echo "CONFIG_PACKAGE_kmod-ip6tables=y" >> ./.config
 
     - name: Update feeds
@@ -87,7 +87,6 @@ jobs:
       id: package
       run: |
         cd openwrt
-        make kernel_oldconfig
         make oldconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
