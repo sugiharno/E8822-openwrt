@@ -71,7 +71,7 @@ env:
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
   SSH_ACTIONS: ${{ inputs.SSH_ACTIONS }}
-  
+
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -106,11 +106,11 @@ jobs:
         cd openwrt
         wget $CONFIG_URL/$CONFIG_DEV
         cp -f ./$CONFIG_DEV ./.config
-		
+
     - name: Load patch
       if: env.PATHCH_FILE != 'nonething' && !cancelled()
       run: |
-        cd openwrt		
+        cd openwrt
         wget $CONFIG_URL/$PATHCH_FILE
         patch -p2 < $PATHCH_FILE
         rm -f $PATHCH_FILE
