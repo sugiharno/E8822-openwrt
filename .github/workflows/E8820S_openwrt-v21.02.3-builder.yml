@@ -25,13 +25,17 @@ on:
           - v21.02.3
           - v21.02.7
           - v23.05.6
+          - v24.10.1
+          - v24.10.2
+          - main
       REPO_URL:
         description: "Select_openwrt_source"
         required: false
         default: "https://github.com/openwrt/openwrt"
         type: choice
         options:
-          - https://github.com/openwrt/openwrt
+          - https://github.com/openwrt/openwrt.git
+          - https://github.com/siwind/openwrt.git
       CONFIG_DEV:
         description: "Select_CONFIG_DEV"
         required: false
@@ -51,7 +55,7 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   
 jobs:
   build:
@@ -87,7 +91,7 @@ jobs:
         cd openwrt
         wget $CONFIG_URL/$PATHCH_FILE
         patch -p2 < $PATHCH_FILE
-        rm -rf $PATHCH_FILE
+        rm -f $PATHCH_FILE
         wget $CONFIG_URL/$CONFIG_DEV
         mv -f ./$CONFIG_DEV ./.config
 
