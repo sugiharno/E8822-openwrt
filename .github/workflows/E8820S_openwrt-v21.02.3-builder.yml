@@ -108,7 +108,7 @@ jobs:
         cp -f ./$CONFIG_DEV ./.config
 		
     - name: Load patch
-	  if: env.PATHCH_FILE != 'nonething' && !cancelled()
+      if: env.PATHCH_FILE != 'nonething' && !cancelled()
       run: |
         cd openwrt		
         wget $CONFIG_URL/$PATHCH_FILE
