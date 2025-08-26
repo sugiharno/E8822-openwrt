@@ -24,6 +24,7 @@ on:
           - v21.02.2
           - v21.02.3
           - v21.02.7
+          - v23.05.6
       REPO_URL:
         description: "Select_openwrt_source"
         required: false
@@ -31,19 +32,21 @@ on:
         type: choice
         options:
           - https://github.com/openwrt/openwrt
-      CONFIG_URL:
-        description: "Select_CONFIG_URL"
+      CONFIG_DEV:
+        description: "Select_CONFIG_DEV"
         required: false
         default: "config-zte-e8820s"
         type: choice
         options:
           - config-zte-e8820s
-          - config-zte-e8820s-full
+          - config-zte-e8820v2
 
 env:
   REPO_URL: ${{ inputs.REPO_URL }}
   REPO_BRANCH: ${{ inputs.REPO_BRANCH }}
-  CONFIG_URL: https://github.com/siwind/openwrt/raw/refs/heads/main/user-config/${{ inputs.CONFIG_URL }}
+  CONFIG_DEV: ${{ inputs.CONFIG_DEV }}
+  CONFIG_URL: https://raw.githubusercontent.com/hiliuyj/hiliuyj.github.io/refs/heads/main/docs/zte_e8820s
+  PATHCH_FILE: changes-zte.patch
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
@@ -82,19 +85,11 @@ jobs:
     - name: Load custom feeds
       run: |
         cd openwrt
-        wget https://raw.githubusercontent.com/TsXor/my-openwrt-archive/master/zte_e8820s/orig-v21.02.3/code.tar.gz
-        tar -zxvf code.tar.gz
-        git config --global user.email "hiliuyj@gmail.com"
-        git config --global user.name "hiliuyj"
-        git config --global apply.whitespace nowarn
-        git apply  code/patch
-        cp -r code/tree/* . 
-        cp -r code/tree/.[^.]* .
-        wget https://github.com/siwind/openwrt/raw/refs/heads/main/target/linux/ramips/dts/mt7621_zte_e8820s.dts
-        mv -f ./mt7621_zte_e8820s.dts ./target/linux/ramips/dts/
-        wget $CONFIG_URL
-        mv -f ./${{ inputs.CONFIG_URL }} ./.config
-        rm -rf code.tar.gz code
+        wget $CONFIG_URL/$PATHCH_FILE
+        patch -p2 < $PATHCH_FILE
+        rm -rf $PATHCH_FILE
+        wget $CONFIG_URL/$CONFIG_DEV
+        mv -f ./$CONFIG_DEV ./.config
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
@@ -109,12 +104,13 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
+    - name: make defconfig
+      run: cd openwrt && make defconfig
+      
     - name: Download package
       id: package
       run: |
-        cd openwrt
-        make kernel_oldconfig
-        make oldconfig
+        cd openwrt        
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
