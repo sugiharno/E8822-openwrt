@@ -44,18 +44,33 @@ on:
         options:
           - config-zte-e8820s
           - config-zte-e8820v2
-
+      PATHCH_FILE:
+        description: "Select_CONFIG_FILE"
+        required: false
+        default: "changes-zte.patch"
+        type: choice
+        options:
+          - changes-zte.patch
+          - NONE
+      SSH_ACTIONS:
+        description: "Select_SSH"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - false
+          - true
 env:
   REPO_URL: ${{ inputs.REPO_URL }}
   REPO_BRANCH: ${{ inputs.REPO_BRANCH }}
   CONFIG_DEV: ${{ inputs.CONFIG_DEV }}
   CONFIG_URL: https://raw.githubusercontent.com/hiliuyj/hiliuyj.github.io/refs/heads/main/docs/zte_e8820s
-  PATHCH_FILE: changes-zte.patch
+  PATHCH_FILE: ${{ inputs.PATHCH_FILE }}
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
-  SSH_ACTIONS: true
+  SSH_ACTIONS: ${{ inputs.SSH_ACTIONS }}
   
 jobs:
   build:
@@ -86,15 +101,20 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: Load custom feeds
+    - name: Load custom config
       run: |
         cd openwrt
+        wget $CONFIG_URL/$CONFIG_DEV
+        mv -f ./$CONFIG_DEV ./.config
+        
+    - name: Load patch
+      if: !contains($PATHCH_FILE, 'NONE')
+      run: |
+        cd openwrt        
         wget $CONFIG_URL/$PATHCH_FILE
         patch -p2 < $PATHCH_FILE
         rm -f $PATHCH_FILE
-        wget $CONFIG_URL/$CONFIG_DEV
-        mv -f ./$CONFIG_DEV ./.config
-
+        
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
