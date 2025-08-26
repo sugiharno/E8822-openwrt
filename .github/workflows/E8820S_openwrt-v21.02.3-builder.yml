@@ -51,7 +51,7 @@ on:
         type: choice
         options:
           - changes-zte.patch
-          - NONE
+          - nonething
       SSH_ACTIONS:
         description: "Select_SSH"
         required: false
@@ -108,7 +108,7 @@ jobs:
         mv -f ./$CONFIG_DEV ./.config
 
     - name: Load patch
-      if: !contains($PATHCH_FILE, 'NONE')
+      if: !contains($PATHCH_FILE, 'nonething')
       run: |
         cd openwrt        
         wget $CONFIG_URL/$PATHCH_FILE
