@@ -10,7 +10,7 @@
 # See /LICENSE for more information.
 #
 
-name: E8820S OpenWrt-v21.02.3 Builder
+name: E8820S OpenWrt zte e8820s/e8820v2 Builder
 
 on:
   workflow_dispatch:
