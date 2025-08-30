@@ -157,7 +157,7 @@ jobs:
       uses: softprops/action-gh-release@master
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN_FOR_RELEASE }}
+        GITHUB_TOKEN: ${{ secrets.for_zte-e8820x-fireware-release }}
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
@@ -176,4 +176,4 @@ jobs:
         keep_latest: 3
         delete_tags: true
       env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN_FOR_RELEASE }}
+        GITHUB_TOKEN: ${{ secrets.for_zte-e8820x-fireware-release }}
